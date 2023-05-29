@@ -12,7 +12,7 @@ Deve cadastrar um novo usuario
     Start Session
     Go to signup
     Register user                          ${user}
-    Notice Should be                       Boas vindas ao Mark85, o seu gerenciador de tarefas.
+    Notice Should be                       Boas vindas ao Mark85, o seu gerenciador de tarefas.    css=.notice p
      
 Usuario duplicado
     [Tags]                                 dup
@@ -24,13 +24,50 @@ Usuario duplicado
     Start Session
     Go to signup
     Register user                          ${user}
-    Notice Should be                       Boas vindas ao Mark85, o seu gerenciador de tarefas.
+    Notice Should be                       Boas vindas ao Mark85, o seu gerenciador de tarefas.    css=.notice p
     Register user                          ${user}
-    Notice Should be                       Oops! Já existe um cadastro com e-mail informado.
+    Notice Should be                       Oops! Já existe um cadastro com e-mail informado.       css=.notice p
 
-# Nome deve ser obrigatorio
+Nome deve ser obrigatorio
+    [Tags]    Nome em branco
+    &{user}   Create Dictionary            name=${EMPTY}                email=tricolor@spfc.com.br      password=123456
 
-# Email deve ser obrigatorio
+    #Remove User By Email                   ${user}[email]
 
-# Senha dever ser obrigatoria
+    Start Session
+    Go to signup
+    Register user                          ${user}
+    Notice Should be                       Informe seu nome completo    css=.alert-error   
+  
+E-mail deve ser obrigatorio
+    [Tags]    E-mail em branco
+    &{user}   Create Dictionary            name=tricolor                email=${EMPTY}      password=123456
 
+    #Remove User By Email                   ${user}[email]
+
+    Start Session
+    Go to signup
+    Register user                          ${user}
+    Notice Should be                       Informe seu e-email    css=.alert-error   
+
+Senha dever ser obrigatoria
+    [Tags]    Senha em branco
+    &{user}   Create Dictionary            name=tricolor                email=tricolor@spfc.com.br      password=${EMPTY}
+
+    #Remove User By Email                   ${user}[email]
+
+    Start Session
+    Go to signup
+    Register user                          ${user}
+    Notice Should be                       Informe uma senha com pelo menos 6 digitos    css=.alert-error   
+
+# Todos os campos de cadastro devem ser obrigatorios 
+#     [Tags]    Todos os campos em branco
+#     &{user}   Create Dictionary            name=${EMPTY}                email=${EMPTY}      password=${EMPTY}
+
+#     Start Session
+#     Go to signup
+#     Register user                          ${user}
+#     Notice Should be                       Informe seu nome completo    css=.alert-error   
+#     Notice Should be                       Informe seu e-email    css=.alert-error   
+#     Notice Should be                       Informe uma senha com pelo menos 6 digitos    css=.alert-error   

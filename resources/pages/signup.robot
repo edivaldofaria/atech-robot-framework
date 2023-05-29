@@ -2,8 +2,6 @@
 Documentation        Página de cadastro
 Library              Browser
 
-
-
 *** Keywords ***
 Go to signup
     Go to                                  http://localhost:3000/signup
@@ -21,9 +19,8 @@ Register user
     Sleep    2
 
 Notice Should be 
-    [Arguments]     ${message}  
+    [Arguments]     ${message}   ${notice} 
 
-    ${notice}                              Set Variable                  css=.notice p
-    
+       
     Wait For Elements State                ${notice}                     visible                      5
     Get Text                               ${notice}                     equal                        ${message}          
