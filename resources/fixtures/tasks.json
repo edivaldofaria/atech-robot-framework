@@ -1,0 +1,39 @@
+{
+    "create": {
+        "user": {
+            "name": "James Gunn",
+            "email": "james@aol.com",
+            "password": "pwd123"
+        },
+        "task": {
+            "name": "Pagar a fatura do cartão de crédito",
+            "tags": ["nubank", "inter", "ourocard"]         
+        }
+       
+    },
+    "remove": {
+            "user": {
+                "name": "Xuxa Meneghel",
+                "email": "xuca@tvglobinho.com",
+                "password": "pwd123"
+            },
+            "task": {
+                "name": "Roteiro do programa infantil",
+                "tags": ["tvglobinho"]         
+            }
+           
+    },
+    "completed": {
+        "user": {
+            "name": "tricolor",
+            "email": "tricolor@spfc.com",
+            "password": "pwd123"
+        },
+        "task": {
+            "name": "Ganhar a Copa do Brasil",
+            "tags": ["SPFC"]         
+        }
+       
+}
+
+}

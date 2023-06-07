@@ -1,6 +1,5 @@
 *** Settings ***
-Resource    ../resources/base.robot
-
+Resource         ../../resources/base.robot 
 
 *** Test Cases ***
 Deve cadastrar um novo usuario
@@ -8,35 +7,32 @@ Deve cadastrar um novo usuario
 
     Remove User By Email                   ${user}[email]
 
-
     Start Session
     Go to signup
     Register user                          ${user}
-    Notice Should be                       Boas vindas ao Mark85, o seu gerenciador de tarefas.         css=.notice p
+    Notice Should be                css=.notice p                Boas vindas ao Mark85, o seu gerenciador de tarefas.        
      
 Usuario duplicado
     [Tags]                                 dup
 
     &{user}   Create Dictionary            name=Jean Gray                email=fenix@xmen.com.br        password=123456
 
-    Remove User By Email                   ${user}[email]
+    Create new user                        ${user}
 
     Start Session
     Go to signup
     Register user                          ${user}
-    Notice Should be                       Boas vindas ao Mark85, o seu gerenciador de tarefas.         css=.notice p
-    Register user                          ${user}
-    Notice Should be                       Oops! Já existe um cadastro com e-mail informado.            css=.notice p
+    Notice Should be                css=.notice p            Oops! Já existe um cadastro com e-mail informado.
+
 
 Nome deve ser obrigatorio
     [Tags]    Nome em branco
     &{user}   Create Dictionary            name=${EMPTY}                email=tricolor@spfc.com.br      password=123456
-
     
     Start Session
     Go to signup
     Register user                          ${user}
-    Notice Should be                       Informe seu nome completo    css=.alert-error   
+    Alert Should be                        css=.alert-error       Informe seu nome completo
   
 E-mail deve ser obrigatorio
     [Tags]    E-mail em branco
@@ -45,7 +41,7 @@ E-mail deve ser obrigatorio
     Start Session
     Go to signup
     Register user                          ${user}
-    Notice Should be                       Informe seu e-email          css=.alert-error   
+    Alert Should be                        css=.alert-error             Informe seu e-email
 
 Senha dever ser obrigatoria
     [Tags]    Senha em branco
@@ -54,7 +50,7 @@ Senha dever ser obrigatoria
     Start Session
     Go to signup
     Register user                          ${user}
-    Notice Should be                       Informe uma senha com pelo menos 6 digitos                   css=.alert-error   
+    Alert Should be                        css=.alert-error             Informe uma senha com pelo menos 6 digitos
 
 Todos os campos de cadastro devem ser obrigatorios 
     [Tags]    Todos os campos em branco
@@ -63,6 +59,7 @@ Todos os campos de cadastro devem ser obrigatorios
     Start Session
     Go to signup
     Register user                          ${user}
-    Notice Should be                       Informe seu nome completo                                    xpath=//*[@id="root"]/div/div[2]/div/form/div[2]/div[2]/small
-    Notice Should be                       Informe seu e-email                                          xpath=//*[@id="root"]/div/div[2]/div/form/div[3]/div[2]/small
-    Notice Should be                       Informe uma senha com pelo menos 6 digitos                   xpath=//*[@id="root"]/div/div[2]/div/form/div[4]/div[2]/small
+    Alert Should be                        xpath=//*[@id="root"]/div/div[2]/div/form/div[2]/div[2]/small             Informe seu nome completo
+    Alert Should be                        xpath=//*[@id="root"]/div/div[2]/div/form/div[3]/div[2]/small             Informe seu e-email
+    Alert Should be                        xpath=//*[@id="root"]/div/div[2]/div/form/div[4]/div[2]/small             Informe uma senha com pelo menos 6 digitos     
+

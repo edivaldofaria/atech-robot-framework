@@ -18,9 +18,9 @@ Register user
 
     Sleep    2
 
-Notice Should be 
-    [Arguments]     ${message}   ${notice} 
 
+Alert Should be 
+    [Arguments]     ${element}   ${text} 
        
-    Wait For Elements State                ${notice}                     visible                      5
-    Get Text                               ${notice}                     equal                        ${message}          
+    Wait For Elements State                ${element}                     visible                      5
+    Get Text                               ${element}                     equal                        ${text}              
